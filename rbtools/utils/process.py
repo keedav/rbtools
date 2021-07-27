@@ -130,12 +130,10 @@ def execute(command,
     popen_encoding_args = {}
 
     if results_unicode:
-        # Popen before Python 3.6 doesn't support the ``encoding`` parameter,
-        # so we have to use ``universal_newlines`` and then decode later.
-        if six.PY3 and sys.version_info.minor >= 6:
-            popen_encoding_args['encoding'] = 'utf-8'
-        else:
-            popen_encoding_args['universal_newlines'] = True
+        # ``encoding`` intentionally not supplied, using the default encoding 
+        # on platforms. Using ``universal_newlines`` to force the output to
+        # text, and then decode later as utf-8.
+        popen_encoding_args['universal_newlines'] = True
 
     if sys.platform.startswith('win'):
         # Convert all environment variables to the native string type, so that
