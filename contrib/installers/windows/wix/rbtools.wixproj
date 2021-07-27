@@ -35,7 +35,7 @@
   into a rbtools.wxs file.
  -->
  <PropertyGroup>
-  <PreBuildEvent>"$(WIX)\bin\heat.exe" dir "$(root)" -gg -ag -dr INSTALLFOLDER -cg rbgroup -srd -sreg -scom -var var.root -out rbtools.wxs</PreBuildEvent>
+  <PreBuildEvent>"C:\Program Files (x86)\WiX Toolset v3.11\bin\heat.exe" dir "$(root)" -gg -ag -dr INSTALLFOLDER -cg rbgroup -srd -sreg -scom -var var.root -out rbtools.wxs</PreBuildEvent>
  </PropertyGroup>
 
  <!-- Compile the generated rbtools.wxs and our provided product.wxs. -->
@@ -52,15 +52,17 @@
 
  <Import Project="$(WixTargetsPath)" />
 
- <!-- Sign the bundled cabinet files -->
+ <!-- Sign the bundled cabinet files 
  <Target Name="SignCabs">
   <SignFile CertificateThumbprint="$(CertificateThumbprint)"
             TimestampUrl="$(TimestampUrl)"
             SigningTarget="%(SignCabs.FullPath)"/>
  </Target>
+-->
 
- <!-- Sign the installer -->
+ <!-- Sign the installer 
  <Target Name="SignMsi">
-  <Exec Command='"$(WindowsSDK80Path)\bin\x64\signtool.exe" sign /sha1 $(CertificateThumbprint) /t $(TimestampUrl) "%(SignMsi.FullPath)"' />
+  <Exec Command='"C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x64\signtool.exe" sign /sha1 $(CertificateThumbprint) /t $(TimestampUrl) "%(SignMsi.FullPath)"' />
  </Target>
+ -->
 </Project>
